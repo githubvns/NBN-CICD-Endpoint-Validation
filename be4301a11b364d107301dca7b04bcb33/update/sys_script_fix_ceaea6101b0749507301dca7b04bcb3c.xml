@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Test Fix script</name>
+        <record_for_rollback>false</record_for_rollback>
+        <script><![CDATA[gs.log("11102363 Fix script line 1");
+var instanceName = gs.getProperty('instance_name');
+var restRec=new GlideRecord('sys_rest_message');
+restRec.query();
+while(restRec.next()){
+	gs.log("11102363 Fix script line 5");
+	var restData=new GlideRecord('u_enpoint_instance_mapping');
+	restData.addQuery('u_rest_message',restRec.sys_id);
+	restData.query();
+	if(restData.next()){
+		gs.log("11102363 Fix script line 11");
+		if(instanceName=='nbnnetsandpit'){
+			gs.log("11102363 Fix script line 13");
+		restRec.rest_endpoint=restData.u_nbn_sandpick_environment ;
+		}
+		if(instanceName=='nbnnettraining'){
+			gs.log("11102363 Fix script line 17");
+		restRec.rest_endpoint=restData.u_nbn_training_environment ;
+		}
+		restRec.update();
+	
+}
+}
+]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>utkarshsingh</sys_created_by>
+        <sys_created_on>2022-04-20 06:14:47</sys_created_on>
+        <sys_id>ceaea6101b0749507301dca7b04bcb3c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test Fix script</sys_name>
+        <sys_package display_value="NBN-CICD Endpoint Validation" source="x_nbnl_nbn_cicd_en">be4301a11b364d107301dca7b04bcb33</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NBN-CICD Endpoint Validation">be4301a11b364d107301dca7b04bcb33</sys_scope>
+        <sys_update_name>sys_script_fix_ceaea6101b0749507301dca7b04bcb3c</sys_update_name>
+        <sys_updated_by>utkarshsingh</sys_updated_by>
+        <sys_updated_on>2022-04-20 06:14:47</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>
